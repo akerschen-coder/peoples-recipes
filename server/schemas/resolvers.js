@@ -1,52 +1,49 @@
-const { Schema, model } = require('mongoose');
-const bcrypt = require('bcrypt');
+const { AuthenticationError } = require('apollo-server-express');
+const { User } = require('../models');
+const { signToken } = require('../utils/auth');
 
-// here we can import for saved recipes 
 
-const userSchema = new Schema(
-  {
-    username: {
-      type: String,
-      required: true,
-      unique: true,
+const resolvers = {
+    Query: {
+        me: async (parent, args, context) => {
+            if (context.user) {
+                const userData = await User.findOne({ _id: context.user._id }).select('-__v-password');
+                
+                return userData;
+            }
+            throw new AuthenticationError('Not logged in');
+        }
     },
-    email: {
-      type: String,
-      required: true,
-      unique: true,
-      match: [/.+@.+\..+/, 'Must use a valid email address'],
-    },
-    password: {
-      type: String,
-      required: true,
-    },
-    // put in an array of saved recipes here when ready 
-  },
-  // set this to use virtual below
-  {
-    toJSON: {
-      virtuals: true,
-    },
-  }
-);
 
-// hash user password
-userSchema.pre('save', async function (next) {
-  if (this.isNew || this.isModified('password')) {
-    const saltRounds = 10;
-    this.password = await bcrypt.hash(this.password, saltRounds);
-  }
+    Mutation: {
+        // add new user 
+        addUser: async (parent, args) => {
+            const user = await User.create(args);
+            const token = signToken(user);
+            return { token, user };
+        },
+        //login user 
+        login: async (parent, { email, password }) => {
+            const user = await User.findOne({ email });
 
-  next();
-});
+            if (!user) {
+                throw new AuthenticationError('No user found with this email address');
+            }
 
-// custom method to compare and validate password for logging in
-userSchema.methods.isCorrectPassword = async function (password) {
-  return bcrypt.compare(password, this.password);
-};
+            const correctPw = await user.isCorrectPassword(password);
 
-// make function here for saved recipes when we get there :)
+            if (!correctPw) {
+                throw new AuthenticationError('Incorrect credentials');
+            }
 
-const User = model('User', userSchema);
+            const token = signToken(user);
 
-module.exports = User;
+            return { token, user };
+        }, 
+        // add recipe
+        // remove recipe
+
+    }
+}
+
+module.exports = resolvers;
