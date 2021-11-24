@@ -1,3 +1,3 @@
 # peoples-recipes
 
-John is not a bottom
+John is a top
