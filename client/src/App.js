@@ -1,6 +1,6 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { Switch } from 'react-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+
 import SavedRecipes from './pages/SavedRecipes';
 import HomePage from './pages/HomePage';
 import Navbar from './components/Navbar';
@@ -33,11 +33,11 @@ function App() {
       <Router>
         <>
           <Navbar />
-          <Switch>
-            <Route exact path='/' component={HomePage} />
-            <Route exact path='/saved' component={SavedRecipes} />
+          <Routes>
+            <Route exact path='/' element={<HomePage/>} />
+            <Route exact path='/saved' element={<SavedRecipes/>} />
             <Route render={() => <h1 className='display-2'>Wrong page!</h1>} />
-          </Switch>
+            </Routes>
         </>
       </Router>
     </ApolloProvider>
