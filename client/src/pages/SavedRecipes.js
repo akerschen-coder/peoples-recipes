@@ -1,4 +1,4 @@
-import { Jumbotron, Container, Col, Form, Button, Card, CardColumns } from 'react-bootstrap';
+import {  Container } from 'react-bootstrap';
 export default function Intro() {
         return (
             <Container>
