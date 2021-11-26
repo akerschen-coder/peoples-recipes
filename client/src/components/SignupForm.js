@@ -37,6 +37,7 @@ const SignupForm = () => {
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
+      console.log(form);
     }
 
     try {
@@ -45,7 +46,7 @@ const SignupForm = () => {
       });
 
       Auth.login(data.login.token);
-     
+
     } catch (err) {
       console.error(err);
     }

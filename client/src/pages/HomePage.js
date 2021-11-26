@@ -4,8 +4,8 @@ import Auth from '../utils/auth';
 export default function Intro() {
     return (
         <Container>
-            {Auth.loggedIn() ? (
-                <>
+            {Auth.loggedIn() ? ( 
+                 <>
             <Form>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Name of Recipe</Form.Label>
@@ -30,7 +30,7 @@ export default function Intro() {
             </>
             ): (
                 <Container>Sign In To Post Grandma's Secrets!</Container>
-            )}
+            )} 
         </Container>
     )
 }
