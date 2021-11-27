@@ -1,5 +1,6 @@
 import { Container, Form, Button, } from 'react-bootstrap';
 import Auth from '../utils/auth';
+import React from 'react';
 
 export default function Intro() {
     return (

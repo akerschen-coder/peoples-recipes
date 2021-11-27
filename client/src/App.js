@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import SavedRecipes from './pages/SavedRecipes';
 import HomePage from './pages/HomePage';
@@ -33,11 +33,11 @@ function App() {
       <Router>
         <>
           <Navbar />
-          <Routes>
+          <Switch>
             <Route exact path='/' element={<HomePage/>} />
             <Route exact path='/saved' element={<SavedRecipes/>} />
             <Route render={() => <h1 className='display-2'>Wrong page!</h1>} />
-            </Routes>
+          </Switch>
         </>
       </Router>
     </ApolloProvider>

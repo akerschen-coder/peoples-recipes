@@ -1,3 +1,4 @@
+import React from 'react';
 import { Container, Card, Button } from 'react-bootstrap';
 export default function Intro() {
     return (
