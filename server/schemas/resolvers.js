@@ -8,7 +8,7 @@ const resolvers = {
         me: async (parent, args, context) => {
             if (context.user) {
                 const userData = await User.findOne({ _id: context.user._id }).select('-__v-password');
-                
+
                 return userData;
             }
             throw new AuthenticationError('Not logged in');
@@ -39,9 +39,31 @@ const resolvers = {
             const token = signToken(user);
 
             return { token, user };
-        }, 
+        },
         // add recipe
+        saveRecipe: async (parent, { recipeData }, context) => {
+            if (context.user) {
+                const updated = await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { $push: { savedRecipes: { recipeData } } },
+                    { new: true },
+                );
+                return updated;
+            }
+            throw new AuthenticationError('Ugh why arent we workin')
+        },
         // remove recipe
+        removeRecipe: async (parent, { recipeId }, context) => {
+            if (context.user) {
+                const updated = await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { $pull: { savedRecipes: { recipeId } } },
+                    { new: true },
+                );
+                return updated;
+            }
+            throw new AuthenticationError('Gotta be logged in!')
+        }
 
     }
 }
