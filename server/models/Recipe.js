@@ -1,6 +1,11 @@
 const { Schema, model } = require('mongoose');
 
 const recipeSchema = new Schema({
+    _id: {
+        type: String,
+        required: true,
+        unique: true,
+    },
     name: {
         type: String,
         required: true,
@@ -16,7 +21,6 @@ const recipeSchema = new Schema({
     image: {
         type: String,
     },
-    //don't know if we need an id or not 
     likeCount: {
         type: Number,
         default: 0,
