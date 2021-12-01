@@ -6,6 +6,13 @@ export const GET_USER = gql`
       _id
       username
       email
+      savedRecipes {
+        recipeId
+        name
+        ingredients
+        directions
+        image
+      }
     }
   }
 `;
