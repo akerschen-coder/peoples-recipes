@@ -16,3 +16,15 @@ export const GET_USER = gql`
     }
   }
 `;
+
+export const GET_ALL = gql`
+query {
+  all {
+      recipeId
+      name
+      ingredients
+      directions
+      image
+  }
+}
+`;

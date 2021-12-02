@@ -1,11 +1,13 @@
 import { Container, Form, Button, Card, CardColumns } from 'react-bootstrap';
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
 
-import { useMutation } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import Auth from '../utils/auth';
 
 import { SAVE_RECIPE } from '../utils/mutations';
+import { GET_ALL } from '../utils/queries'
 import { saveRecipeIds, getSavedRecipeIds } from '../utils/localStorage';
+
 
 const HomepageSaver = () => {
     const [saveRecipe, { error }] = useMutation(SAVE_RECIPE);
@@ -18,7 +20,10 @@ const HomepageSaver = () => {
 
     // create state for holding the databases saved recipes
     // how to connect it to the database though?? 
-    const [peoplesRecipes, setPeoplesRecipes] = useState([]);
+
+    const { loading, data } = useQuery(GET_ALL);
+
+    const recipeData = data?.all || {};
 
     const handleSaveRecipe = async (recipeId) => {
         //need to change searchedbooks to search our database 
@@ -46,47 +51,8 @@ const HomepageSaver = () => {
     return (
         <>
             <Container>
-                {Auth.loggedIn() ? (
-                    <>
-                        <Form>
-                            <Form.Group className="mb-3" controlId="formBasicEmail">
-                                <Form.Label>Name of Recipe</Form.Label>
-                                <Form.Control type="name" placeholder="Enter name" />
-                            </Form.Group>
-
-                            <Form.Group className="mb-3" controlId="formBasicPassword">
-                                <Form.Label>Ingredients and Measurements</Form.Label>
-                                <Form.Control type="ingredients" placeholder="chicken, bacon, etc" />
-                                <Form.Text className="text-muted">
-                                    Put commas between ingredients
-                                </Form.Text>
-                            </Form.Group>
-
-                            <Form.Group className="mb-3" controlId="formBasicPassword">
-                                <Form.Label>Directions</Form.Label>
-                                <Form.Control type="directions" placeholder="chicken, bacon, etc" />
-                                <Form.Text className="text-muted">
-                                    Put commas between steps
-                                </Form.Text>
-                            </Form.Group>
-
-                            <Form.Group controlId="formFile" className="mb-3">
-                                <Form.Label>Have an Image?</Form.Label>
-                                <Form.Control type="image" />
-                            </Form.Group>
-                            <Button variant="primary" type="submit">
-                                Submit
-                            </Button>
-                        </Form>
-                    </>
-                ) : (
-                    <Container>Sign In To Post Grandma's Secrets!</Container>
-                )}
-            </Container>
-
-            <Container>
                 <CardColumns>
-                    {peoplesRecipes.map((recipe) => {
+                    {recipeData.map((recipe) => {
                         return (
                             <Card key={recipe.recipeId} style={{ width: '18rem' }}>
                                 <Card.Img variant="top" src={recipe.image} />
@@ -104,8 +70,8 @@ const HomepageSaver = () => {
                                             className='btn-block btn-info'
                                             onClick={() => handleSaveRecipe(recipe.recipeId)}>
                                             {savedRecipeIds?.some((savedRecipeId) => savedRecipeId === recipe.recipeId)
-                                                ? 'This book has already been saved!'
-                                                : 'Save this Book!'}
+                                                ? 'This recipe has already been saved!'
+                                                : 'Save this recipe!'}
                                         </Button>
                                     )}
                                 </Card.Body>
@@ -113,7 +79,6 @@ const HomepageSaver = () => {
                         )
                     })}
                 </CardColumns>
-                {/* have a with auth for liking them or not <3 */}
             </Container>
         </>
     )
