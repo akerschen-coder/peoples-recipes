@@ -55,4 +55,16 @@ mutation removeRecipe($recipeId: ID!) {
     }
   }
 }
-`
+`; 
+
+export const CREATE_RECIPE= gql`
+mutation createRecipe($name: String!, $ingredients: String!,  $directions: String!, $image: String) {
+  createRecipe(name: $name, ingredients: $ingredients, directions: $directions, image: $image ){
+    recipeId
+    name
+    ingredients
+    directions
+    image
+  }
+}
+`;

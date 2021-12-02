@@ -31,13 +31,15 @@ const typeDefs = gql`
 
   type Query {
     me: User
-  }
+    all: Recipe
+  } 
 
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
     saveRecipe(recipeData: RecipeInput!): User
     removeRecipe(recipeId: ID!): User
+    createRecipe(name: String!, ingredients: String!,  directions: String!, image: String): Recipe
   }
 
 `;

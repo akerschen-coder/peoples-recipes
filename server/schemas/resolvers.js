@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User } = require('../models/index');
+const { User, Recipe } = require('../models/index');
 const { signToken } = require('../utils/auth');
 
 
@@ -39,6 +39,11 @@ const resolvers = {
             const token = signToken(user);
 
             return { token, user };
+        },
+        // create recipe 
+        createRecipe: async (parent, args) => {
+            const recipe = await Recipe.create(args);
+            return { recipe };
         },
         // add recipe
         saveRecipe: async (parent, { recipeData }, context) => {
