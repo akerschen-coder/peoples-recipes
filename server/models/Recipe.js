@@ -1,21 +1,12 @@
-const { Schema, model } = require('mongoose');
+const { Schema } = require('mongoose');
 
-const recipeSchema = new Schema({
-    name: {
-        type: String,
-        required: true,
-    },    
-    ingredients: {
-        type: [String],
-        required: true,
-    },
-    directions: {
-        type: [String],
-        required: true,
-    },
-    image: {
-        type: String,
-    },
+const postRecipe = new Schema({
+    title: String,
+    message: String,
+    // need to be able to link token/username 
+    creator: String,
+    tags: [String],
+    selectedFile: String,
     likeCount: {
         type: Number,
         default: 0,
@@ -24,7 +15,6 @@ const recipeSchema = new Schema({
         type: Date,
         default: new Date(),
     },
-});
+})
 
-const Recipe = model('Recipe', recipeSchema);
-module.exports = Recipe;
+module.exports = postRecipe;

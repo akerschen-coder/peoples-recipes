@@ -45,6 +45,7 @@ userSchema.methods.isCorrectPassword = async function (password) {
   return bcrypt.compare(password, this.password);
 };
 
+// make function here for saved recipes when we get there :)
 
 const User = model('User', userSchema);
 

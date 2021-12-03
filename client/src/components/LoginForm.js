@@ -13,7 +13,6 @@ const LoginForm = () => {
   const [showAlert, setShowAlert] = useState(false);
 
   const [loginUser, { error }] = useMutation(LOGIN_USER);
-
   useEffect(() => {
     if (error) {
       setShowAlert(true)
@@ -102,3 +101,4 @@ const LoginForm = () => {
 };
 
 export default LoginForm;
+
