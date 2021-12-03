@@ -6,7 +6,7 @@ export default function Intro() {
     // search
     // handle search change 
         // have to figure out exactly what were pulling to display
-    // formsubmit function 
+    // form submit function 
         //has to target form 
 
 
@@ -19,6 +19,7 @@ export default function Intro() {
             <div>
                 home page 
             </div>
+            
         </Container>
     )
 }
