@@ -40,36 +40,9 @@ const resolvers = {
 
             return { token, user };
         },
-        // create recipe 
-        createRecipe: async (parent, args) => {
-            const recipe = await Recipe.create(args);
-            return { recipe };
-        },
         // add recipe
-        saveRecipe: async (parent, { recipeData }, context) => {
-            if (context.user) {
-                const updated = await User.findOneAndUpdate(
-                    { _id: context.user._id },
-                    { $push: { savedRecipes: { recipeData } } },
-                    { new: true },
-                );
-                return updated;
-            }
-            throw new AuthenticationError('Ugh why arent we workin')
-        },
-        // remove recipe
-        removeRecipe: async (parent, { recipeId }, context) => {
-            if (context.user) {
-                const updated = await User.findOneAndUpdate(
-                    { _id: context.user._id },
-                    { $pull: { savedRecipes: { recipeId } } },
-                    { new: true },
-                );
-                return updated;
-            }
-            throw new AuthenticationError('Gotta be logged in!')
-        }
 
+        // remove recipe
     }
 }
 
