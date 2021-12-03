@@ -6,25 +6,6 @@ export const GET_USER = gql`
       _id
       username
       email
-      savedRecipes {
-        recipeId
-        name
-        ingredients
-        directions
-        image
-      }
     }
   }
-`;
-
-export const GET_ALL = gql`
-query {
-  all {
-      recipeId
-      name
-      ingredients
-      directions
-      image
-  }
-}
 `;
