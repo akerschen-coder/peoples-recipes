@@ -31,7 +31,7 @@ export default function Intro() {
         try {
             const response = await fetch(
                 `https://api.edamam.com/api/recipes/v2?type=public&q=${searchInput}&app_id=b1be71ba561901dcc4bdbbd96d737834';`, {
-                mode: "no-cors",
+                mode: "opaque",
                 headers: {
                     'Content-Type': 'application/json',
                     'Access-Control-Allow-Origin': 'http://localhost:3000',
