@@ -88,11 +88,11 @@ export default function Intro() {
     }
 
     try {
-      const { hits } = await saveRecipe({
+      const { data } = await saveRecipe({
         variables: { recipeData: { ...recipeToSave } },
       });
 
-      if (!hits) {
+      if (!data) {
         throw new Error("something went wrong!");
       }
       // if book successfully saves to user's account, save book id to state
