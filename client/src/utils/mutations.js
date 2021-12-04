@@ -39,7 +39,7 @@ export const SAVE_RECIPE = gql`
 `;
 
 export const REMOVE_RECIPE = gql`
-  mutation removeRecipe($foodId: ID!) {
+  mutation removeRecipe($foodId: String!) {
     removeRecipe(foodId: $foodId) {
       _id
       username

@@ -48,7 +48,7 @@ export default function Intro() {
             const { hits } = await response.json();
             console.log(hits);
             const recipeData = hits.map((hit) => ({
-                foodId: hit.recipe.foodId,
+                foodId: hit.recipe.url,
                 label: hit.recipe.label,
                 link: hit.recipe.url,
                 image: hit.recipe.image || "",

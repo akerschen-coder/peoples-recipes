@@ -3,7 +3,6 @@ const { Schema } = require('mongoose');
 const postRecipe = new Schema({
     foodId: {
         type: String,
-        autoIncrement: true,
         required: true,
     },
     label: {
