@@ -109,9 +109,8 @@ export default function Intro() {
                                     />
                                 ) : null}
                                 <Card.Body>
-                                    <Card.Title>Label: {recipe.label}</Card.Title>
-                                    <p className="small"> {recipe.label}</p>
-                                    <Card.Text>Recipe Link {recipe.url}</Card.Text>
+                                    <Card.Title> {recipe.label}</Card.Title>
+                                    <Card.Link href={recipe.link}>Recipe</Card.Link>
                                     {/* {Auth.loggedIn() && (
                                         <Button
                                             disabled={savedRecipeIds?.some(
