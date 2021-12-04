@@ -109,13 +109,8 @@ export default function Intro() {
                                 ) : null}
                                 <Card.Body>
                                     <Card.Title> {recipe.label}</Card.Title>
-<<<<<<< HEAD
-                                    <Card.Link href={recipe.link}>Recipe</Card.Link>
-                                     {Auth.loggedIn() && (
-=======
                                     <Card.Link href={recipe.link} target= "_blank">Recipe</Card.Link>
                                     {/* {Auth.loggedIn() && (
->>>>>>> 8c7d708592f4ec65b63dbfcdb3d83a0af5c86d8a
                                         <Button
                                             disabled={savedRecipeIds?.some(
                                                 (savedRecipeId) => savedRecipeId === recipe.foodId
@@ -130,6 +125,7 @@ export default function Intro() {
                                                 : "Save this Recipe!"}
                                         </Button>
                                     )} 
+                                            */}
                                 </Card.Body>
                             </Card>
                         );
