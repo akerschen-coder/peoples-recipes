@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
     Card,
     CardColumns,
@@ -8,38 +8,40 @@ import {
     Form,
     Button,
 } from "react-bootstrap";
-
 import Auth from "../utils/auth";
 import { useMutation } from "@apollo/client";
-
-
+import { SAVE_RECIPE } from "../utils/mutations";
+import { saveRecipeIds, getSavedRecipeIds } from "../utils/localStorage";
 export default function Intro() {
     // search
     // handle search change
     // have to figure out exactly what were pulling to display
     const [searchedRecipes, setSearchedRecipes] = useState([]);
-
     const [searchInput, setSearchInput] = useState("");
-
+    const [savedRecipeIds, setSavedRecipeIds] = useState(getSavedRecipeIds());
+    const [saveRecipe] = useMutation(SAVE_RECIPE);
+    useEffect(() => {
+        return () => saveRecipeIds(savedRecipeIds);
+    });
     // formsubmit function
     //has to target form
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-
         if (!searchInput) {
             return false;
         }
-
         try {
             const response = await fetch(
-                `https://api.edamam.com/api/recipes/v2?type=public&q=` + `${searchInput}` + `&app_id=0bef8d90&app_key=3aa6e2558540ee0b95bb5b427b5c3a98`, {
-                mode: "cors",
-                headers: {
-                    'Access-Control-Allow-Origin': 'http://localhost:3000',
-                },
-            }
+                `https://api.edamam.com/api/recipes/v2?type=public&q=` +
+                `${searchInput}` +
+                `&app_id=0bef8d90&app_key=3aa6e2558540ee0b95bb5b427b5c3a98`,
+                {
+                    mode: "cors",
+                    headers: {
+                        "Access-Control-Allow-Origin": "http://localhost:3000",
+                    },
+                }
             );
-            
             if (!response.ok) {
                 throw new Error("something went wrong!");
             }
@@ -49,9 +51,8 @@ export default function Intro() {
                 foodId: hit.recipe.foodId,
                 label: hit.recipe.label,
                 link: hit.recipe.url,
-                image: hit.recipe.image || '',
+                image: hit.recipe.image || "",
             }));
-
             setSearchedRecipes(recipeData);
             setSearchInput("");
             console.log(recipeData);
@@ -59,11 +60,30 @@ export default function Intro() {
             console.error(err);
         }
     };
-
-    //later, lets just get recipes up first
     // function to save recipe
-
-
+    const handleSaveRecipe = async (foodId) => {
+        // find the book in `searchedBooks` state by the matching id
+        const recipeToSave = searchedRecipes.find(
+            (recipe) => recipe.foodId === foodId
+        );
+        // get token
+        const token = Auth.loggedIn() ? Auth.getToken() : null;
+        if (!token) {
+            return false;
+        }
+        try {
+            const { data } = await saveRecipe({
+                variables: { recipeData: { ...recipeToSave } },
+            });
+            if (!data) {
+                throw new Error("something went wrong!");
+            }
+            // if book successfully saves to user's account, save book id to state
+            setSavedRecipeIds([...savedRecipeIds, recipeToSave.foodId]);
+        } catch (error) {
+            console.error(error);
+        }
+    };
     return (
         <>
             <Jumbotron fluid className="text-light bg-dark">
@@ -109,8 +129,10 @@ export default function Intro() {
                                 ) : null}
                                 <Card.Body>
                                     <Card.Title> {recipe.label}</Card.Title>
-                                    <Card.Link href={recipe.link} target= "_blank">Recipe</Card.Link>
-                                    {/* {Auth.loggedIn() && (
+                                    <Card.Link href={recipe.link} target="_blank">
+                                        Recipe
+                                    </Card.Link>
+                                    {Auth.loggedIn() && (
                                         <Button
                                             disabled={savedRecipeIds?.some(
                                                 (savedRecipeId) => savedRecipeId === recipe.foodId
@@ -124,8 +146,7 @@ export default function Intro() {
                                                 ? "This recipe has already been saved!"
                                                 : "Save this Recipe!"}
                                         </Button>
-                                    )} 
-                                            */}
+                                    )}
                                 </Card.Body>
                             </Card>
                         );
