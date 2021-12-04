@@ -23,3 +23,32 @@ export const ADD_USER = gql`
     }
   }
 `;
+
+export const SAVE_RECIPE = gql`
+  mutation saveRecipe($recipeData: RecipeInput!) {
+    saveRecipe(recipeData: $recipeData) {
+      username
+      savedRecipes {
+        foodId
+        label
+        image
+        link
+      }
+    }
+  }
+`;
+
+export const REMOVE_RECIPE = gql`
+  mutation removeRecipe($foodId: ID!) {
+    removeRecipe(foodId: $foodId) {
+      _id
+      username
+      savedRecipes {
+        foodId
+        label
+        image
+        link
+      }
+    }
+  }
+`;
