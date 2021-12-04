@@ -15,7 +15,7 @@ const typeDefs = gql`
   }
 
   input RecipeInput {
-    foodId: Number!
+    foodId: String!
     label: String!
     link: String!
     image: String

@@ -2,7 +2,7 @@ const { Schema } = require('mongoose');
 
 const postRecipe = new Schema({
     foodId: {
-        type: Number,
+        type: String,
         autoIncrement: true,
         required: true,
     },
