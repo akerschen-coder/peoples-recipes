@@ -43,16 +43,20 @@ export default function Intro() {
             }
 
 
-            const  { hits }  = await response.json();
+            const { hits } = await response.json();
             console.log(hits);
-           
-            
-            const recipeData = hits.map((recipe) => ({
-                foodId: recipe.id,
+ 
+
+            const recipeData = hits.map((hit) => ({
+                foodId: hit.recipe.source,
+                label: hit.recipe.label,
+                link: hit.recipe.url,
+                image: hit.recipe.image || '',
             }));
 
             setSearchedRecipes(recipeData);
             setSearchInput("");
+            console.log(recipeData);
         } catch (err) {
             console.error(err);
         }
@@ -93,41 +97,41 @@ export default function Intro() {
                         ? `Viewing ${searchedRecipes.length} results:`
                         : "Search for a recipe to begin"}
                 </h2>
-                {/* <CardColumns>
-          {searchedRecipes.map((recipe) => {
-            return (
-              <Card key={recipe.foodId} border="dark">
-                {recipe.image ? (
-                  <Card.Img
-                    src={recipe.image}
-                    alt={`The cover for ${recipe.title}`}
-                    variant="top"
-                  />
-                ) : null}
-                <Card.Body>
-                  <Card.Title>{recipe.title}</Card.Title>
-                  <p className="small">Authors: {recipe.authors}</p>
-                  <Card.Text>{recipe.description}</Card.Text>
-                  {Auth.loggedIn() && (
-                    <Button
-                      disabled={savedRecipeIds?.some(
-                        (savedRecipeId) => savedRecipeId === recipe.foodId
-                      )}
-                      className="btn-block btn-info"
-                      onClick={() => handleSaveRecipe(recipe.foodId)}
-                    >
-                      {savedRecipeIds?.some(
-                        (savedRecipeId) => savedRecipeId === recipe.foodId
-                      )
-                        ? "This recipe has already been saved!"
-                        : "Save this Recipe!"}
-                    </Button>
-                  )}
-                </Card.Body>
-              </Card>
-            );
-          })}
-        </CardColumns> */}
+                <CardColumns>
+                    {searchedRecipes.map((recipe) => {
+                        return (
+                            <Card key={recipe.foodId} border="dark">
+                                {recipe.image ? (
+                                    <Card.Img
+                                        src={recipe.image}
+                                        alt={`The cover for ${recipe.title}`}
+                                        variant="top"
+                                    />
+                                ) : null}
+                                <Card.Body>
+                                    <Card.Title>Label: {recipe.label}</Card.Title>
+                                    <p className="small"> {recipe.label}</p>
+                                    <Card.Text>Recipe Link {recipe.url}</Card.Text>
+                                    {/* {Auth.loggedIn() && (
+                                        <Button
+                                            disabled={savedRecipeIds?.some(
+                                                (savedRecipeId) => savedRecipeId === recipe.foodId
+                                            )}
+                                            className="btn-block btn-info"
+                                            onClick={() => handleSaveRecipe(recipe.foodId)}
+                                        >
+                                            {savedRecipeIds?.some(
+                                                (savedRecipeId) => savedRecipeId === recipe.foodId
+                                            )
+                                                ? "This recipe has already been saved!"
+                                                : "Save this Recipe!"}
+                                        </Button>
+                                    )} */}
+                                </Card.Body>
+                            </Card>
+                        );
+                    })}
+                </CardColumns>
             </Container>
         </>
     );
