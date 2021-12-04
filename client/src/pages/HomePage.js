@@ -8,8 +8,10 @@ import {
     Form,
     Button,
 } from "react-bootstrap";
+
 import Auth from "../utils/auth";
 import { useMutation } from "@apollo/client";
+
 
 export default function Intro() {
     // search
@@ -41,12 +43,8 @@ export default function Intro() {
             if (!response.ok) {
                 throw new Error("something went wrong!");
             }
-
-
             const { hits } = await response.json();
             console.log(hits);
- 
-
             const recipeData = hits.map((hit) => ({
                 foodId: hit.recipe.foodId,
                 label: hit.recipe.label,
@@ -64,6 +62,7 @@ export default function Intro() {
 
     //later, lets just get recipes up first
     // function to save recipe
+
 
     return (
         <>
@@ -111,7 +110,7 @@ export default function Intro() {
                                 <Card.Body>
                                     <Card.Title> {recipe.label}</Card.Title>
                                     <Card.Link href={recipe.link}>Recipe</Card.Link>
-                                    {/* {Auth.loggedIn() && (
+                                     {Auth.loggedIn() && (
                                         <Button
                                             disabled={savedRecipeIds?.some(
                                                 (savedRecipeId) => savedRecipeId === recipe.foodId
@@ -125,7 +124,7 @@ export default function Intro() {
                                                 ? "This recipe has already been saved!"
                                                 : "Save this Recipe!"}
                                         </Button>
-                                    )} */}
+                                    )} 
                                 </Card.Body>
                             </Card>
                         );
