@@ -53,11 +53,11 @@ const resolvers = {
             throw new AuthenticationError('Ugh why arent we workin')
         },
         // remove recipe
-        removeRecipe:  async (parent, { recipeId }, context) => {
+        removeRecipe:  async (parent, { foodId }, context) => {
             if(context.user) {
                 const updated = await User.findOneAndUpdate(
                     { _id: context.user._id },
-                    {$pull: { savedRecipe: { recipeId }} },
+                    {$pull: { savedRecipe: { foodId }} },
                     { new: true },
                 );
                 return updated;
