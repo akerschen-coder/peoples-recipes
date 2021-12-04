@@ -37,7 +37,7 @@ export default function Intro() {
                 },
             }
             );
-            console.log(response);
+            
             if (!response.ok) {
                 throw new Error("something went wrong!");
             }
@@ -48,7 +48,7 @@ export default function Intro() {
  
 
             const recipeData = hits.map((hit) => ({
-                foodId: hit.recipe.source,
+                foodId: hit.recipe.foodId,
                 label: hit.recipe.label,
                 link: hit.recipe.url,
                 image: hit.recipe.image || '',

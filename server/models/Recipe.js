@@ -1,19 +1,25 @@
 const { Schema } = require('mongoose');
 
 const postRecipe = new Schema({
-    title: String,
-    message: String,
-    // need to be able to link token/username 
-    creator: String,
-    tags: [String],
-    selectedFile: String,
+    foodId: {
+        type: Number,
+        autoIncrement: true,
+        required: true,
+    },
+    label: {
+        type: String,
+        required: true,
+    },
+    link: {
+        type: String,
+        required: true,
+    },
+    image: {
+        type: String,
+    },
     likeCount: {
         type: Number,
         default: 0,
-    },
-    createdAt: {
-        type: Date,
-        default: new Date(),
     },
 })
 
