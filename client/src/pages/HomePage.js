@@ -30,10 +30,9 @@ export default function Intro() {
 
         try {
             const response = await fetch(
-                `https://api.edamam.com/api/recipes/v2?type=public&q=${searchInput}&app_id=b1be71ba561901dcc4bdbbd96d737834';`, {
-                mode: "opaque",
+                `https://api.edamam.com/api/recipes/v2?type=public&q=` + `${searchInput}` + `&app_id=0bef8d90&app_key=3aa6e2558540ee0b95bb5b427b5c3a98`, {
+                mode: "cors",
                 headers: {
-                    'Content-Type': 'application/json',
                     'Access-Control-Allow-Origin': 'http://localhost:3000',
                 },
             }
@@ -44,9 +43,11 @@ export default function Intro() {
             }
 
 
-            const { items } = await response.json();
-
-            const recipeData = items.map((recipe) => ({
+            const  { hits }  = await response.json();
+            console.log(hits);
+           
+            
+            const recipeData = hits.map((recipe) => ({
                 foodId: recipe.id,
             }));
 
