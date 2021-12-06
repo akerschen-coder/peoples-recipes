@@ -1,7 +1,8 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
 
-// here we can import for saved recipes 
+// here we can import for saved recipes
+const savedRecipe = require('./Recipe');
 
 const userSchema = new Schema(
   {
@@ -20,7 +21,8 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    // put in an array of saved recipes here when ready 
+    // put in an array of saved recipes here when ready
+    savedRecipes: [savedRecipe],
   },
   // set this to use virtual below
   {

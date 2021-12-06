@@ -1,6 +1,6 @@
 const { Schema } = require('mongoose');
 
-const postRecipe = new Schema({
+const saveRecipe = new Schema({
     foodId: {
         type: String,
         required: true,
@@ -22,4 +22,4 @@ const postRecipe = new Schema({
     },
 })
 
-module.exports = postRecipe;
+module.exports = saveRecipe;

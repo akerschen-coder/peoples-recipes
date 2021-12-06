@@ -19,7 +19,7 @@ export default function Intro() {
     const [searchedRecipes, setSearchedRecipes] = useState([]);
     const [searchInput, setSearchInput] = useState("");
     const [savedRecipeIds, setSavedRecipeIds] = useState(getSavedRecipeIds());
-    const [saveRecipe] = useMutation(SAVE_RECIPE);
+    const [saveRecipe, {error}] = useMutation(SAVE_RECIPE);
     useEffect(() => {
         return () => saveRecipeIds(savedRecipeIds);
     });
@@ -48,7 +48,7 @@ export default function Intro() {
             const { hits } = await response.json();
             console.log(hits);
             const recipeData = hits.map((hit) => ({
-                foodId: hit.recipe.url,
+                foodId: hit.recipe.uri,
                 label: hit.recipe.label,
                 link: hit.recipe.url,
                 image: hit.recipe.image || "",
@@ -66,6 +66,7 @@ export default function Intro() {
         const recipeToSave = searchedRecipes.find(
             (recipe) => recipe.foodId === foodId
         );
+        console.log(recipeToSave);
         // get token
         const token = Auth.loggedIn() ? Auth.getToken() : null;
         if (!token) {
@@ -75,14 +76,16 @@ export default function Intro() {
             const { data } = await saveRecipe({
                 variables: { recipeData: { ...recipeToSave } },
             });
+
             if (!data) {
-                throw new Error("something went wrong!");
+                throw new Error(error);
             }
             // if book successfully saves to user's account, save book id to state
             setSavedRecipeIds([...savedRecipeIds, recipeToSave.foodId]);
         } catch (error) {
             console.error(error);
         }
+        console.log(savedRecipeIds);
     };
     return (
         <>
