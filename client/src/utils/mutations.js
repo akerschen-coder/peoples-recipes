@@ -27,7 +27,9 @@ export const ADD_USER = gql`
 export const SAVE_RECIPE = gql`
   mutation saveRecipe($recipeData: RecipeInput!) {
     saveRecipe(recipeData: $recipeData) {
+      _id
       username
+      email
       savedRecipes {
         foodId
         label
@@ -43,6 +45,7 @@ export const REMOVE_RECIPE = gql`
     removeRecipe(foodId: $foodId) {
       _id
       username
+      email
       savedRecipes {
         foodId
         label

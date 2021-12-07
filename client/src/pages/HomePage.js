@@ -10,8 +10,10 @@ import {
 } from "react-bootstrap";
 import Auth from "../utils/auth";
 import { useMutation } from "@apollo/client";
+
 import { SAVE_RECIPE } from "../utils/mutations";
 import { saveRecipeIds, getSavedRecipeIds } from "../utils/localStorage";
+
 export default function Intro() {
     // search
     // handle search change
@@ -20,9 +22,11 @@ export default function Intro() {
     const [searchInput, setSearchInput] = useState("");
     const [savedRecipeIds, setSavedRecipeIds] = useState(getSavedRecipeIds());
     const [saveRecipe, {error}] = useMutation(SAVE_RECIPE);
+
     useEffect(() => {
         return () => saveRecipeIds(savedRecipeIds);
     });
+
     // formsubmit function
     //has to target form
     const handleFormSubmit = async (event) => {
@@ -46,16 +50,14 @@ export default function Intro() {
                 throw new Error("something went wrong!");
             }
             const { hits } = await response.json();
-            console.log(hits);
-            const recipeData = hits.map((hit) => ({
+            const recipeD = hits.map((hit) => ({
                 foodId: hit.recipe.uri,
                 label: hit.recipe.label,
                 link: hit.recipe.url,
                 image: hit.recipe.image || "",
             }));
-            setSearchedRecipes(recipeData);
-            setSearchInput("");
-            console.log(recipeData);
+            setSearchedRecipes(recipeD);
+            setSearchInput('');
         } catch (err) {
             console.error(err);
         }
@@ -72,20 +74,21 @@ export default function Intro() {
         if (!token) {
             return false;
         }
+        // got to here, won't go inside try
         try {
             const { data } = await saveRecipe({
                 variables: { recipeData: { ...recipeToSave } },
             });
-
+            console.log(data);
             if (!data) {
                 throw new Error(error);
             }
-            // if book successfully saves to user's account, save book id to state
+            // if recipe successfully saves to user's account, save book id to state
             setSavedRecipeIds([...savedRecipeIds, recipeToSave.foodId]);
         } catch (error) {
             console.error(error);
         }
-        console.log(savedRecipeIds);
+
     };
     return (
         <>
@@ -141,8 +144,8 @@ export default function Intro() {
                                                 (savedRecipeId) => savedRecipeId === recipe.foodId
                                             )}
                                             className="btn-block btn-info"
-                                            onClick={() => handleSaveRecipe(recipe.foodId)}
-                                        >
+                                            onClick={() => handleSaveRecipe(recipe.foodId)}>
+                                                
                                             {savedRecipeIds?.some(
                                                 (savedRecipeId) => savedRecipeId === recipe.foodId
                                             )
