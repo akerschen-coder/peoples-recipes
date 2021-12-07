@@ -41,6 +41,7 @@ const resolvers = {
             return { token, user };
         }, 
         // add recipe
+        // yes
         saveRecipe: async (parent, { recipeData }, context) => {
             if(context.user) {
                 const updated = await User.findByIdAndUpdate(
