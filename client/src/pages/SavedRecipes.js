@@ -42,9 +42,10 @@ const SavedRecipe = () => {
     }
   };
 
-  // if (loading) {
-  //   return <h2>LOADING...</h2>;
-  // }
+  if (loading) {
+    return <h2>LOADING...</h2>;
+  }
+//yes
 
   return (
     <>
