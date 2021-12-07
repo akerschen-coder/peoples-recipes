@@ -85,6 +85,7 @@ export default function Intro() {
             }
             // if recipe successfully saves to user's account, save book id to state
             setSavedRecipeIds([...savedRecipeIds, recipeToSave.foodId]);
+            console.log(savedRecipeIds)
         } catch (error) {
             console.error(error);
         }
