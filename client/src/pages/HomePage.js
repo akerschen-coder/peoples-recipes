@@ -134,10 +134,10 @@ export default function Intro() {
                                     />
                                 ) : null}
                                 <Card.Body>
-                                    <Card.Title> {recipe.label}</Card.Title>
-                                    <Card.Link href={recipe.link} target="_blank">
-                                        Recipe
-                                    </Card.Link>
+                                    <Card.Title style={{textAlign: "center"}}> {recipe.label}</Card.Title>
+                                    <Button href={recipe.link} target="_blank" className="btn-block btn-info">
+                                    Recipe
+                                        </Button>
                                     {Auth.loggedIn() && (
                                         <Button
                                             disabled={savedRecipeIds?.some(
