@@ -25,17 +25,17 @@ const authLink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : "",
+      authorization: token
     },
   };
 });
 
 const client = new ApolloClient({
   // Set up our client to execute the `authLink` middleware prior to making the request to our GraphQL API
-  // link: authLink.concat(httpLink),
+  link: authLink.concat(httpLink),
   
   cache: new InMemoryCache(),
-  httpLink,
+  // httpLink,
 });
 
 // still need main path
