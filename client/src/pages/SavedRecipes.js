@@ -19,7 +19,11 @@ const SavedRecipe = () => {
   const { loading, data } = useQuery(GET_USER);
   const [removeRecipe, { error }] = useMutation(REMOVE_RECIPE);
   const userData = data?.me || {};
+
   console.log(Auth.getToken());
+  console.log(userData);
+  console.log(data);
+
   const handleDeleteRecipe = async (foodId) => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
@@ -42,6 +46,7 @@ const SavedRecipe = () => {
     return <h2>LOADING...</h2>;
   }
 //yes
+
   return (
     <>
       <Jumbotron fluid className="text-light bg-dark">
