@@ -101,7 +101,7 @@ export default function Intro() {
     };
     return (
         <>
-            <Jumbotron fluid className="text-light bg-dark">
+            <Jumbotron fluid className="text-light bg-info">
                 <Container>
                     <h1>Search for Recipes!</h1>
                     <Form onSubmit={handleFormSubmit}>

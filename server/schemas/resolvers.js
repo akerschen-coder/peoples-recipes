@@ -69,6 +69,7 @@ const resolvers = {
                 );
                 return updated;
             }
+            console.log(foodId);
             throw new AuthenticationError('Gotta be logged in!')
         }
     }

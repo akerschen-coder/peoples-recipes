@@ -21,8 +21,6 @@ const SavedRecipe = () => {
 
   const userData = data?.me || {};
 
-  console.log(userData);
-
   const handleDeleteRecipe = async (foodId) => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
@@ -32,7 +30,7 @@ const SavedRecipe = () => {
 
     try {
       const { data } = await removeRecipe({
-        variables: { foodId: foodId },
+        variables: { foodId },
       });
 
       removeRecipeId(foodId);
@@ -48,7 +46,7 @@ const SavedRecipe = () => {
 
   return (
     <>
-      <Jumbotron fluid className="text-light bg-dark">
+      <Jumbotron fluid className="text-light bg-info">
         <Container>
           <h1> Viewing saved recipes!</h1>
         </Container>
