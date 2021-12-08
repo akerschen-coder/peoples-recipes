@@ -51,7 +51,6 @@ const resolvers = {
                     { new: true },
                 );
                 console.log(updated);
-                console.log({context});
                 return updated;
             }
             console.log(recipeData);

@@ -16,10 +16,6 @@ const recipeSchema = new Schema({
     image: {
         type: String,
     },
-    likeCount: {
-        type: Number,
-        default: 0,
-    },
 })
 
 module.exports = recipeSchema;
