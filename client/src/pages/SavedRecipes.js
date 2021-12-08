@@ -64,7 +64,7 @@ const SavedRecipe = () => {
         <CardColumns>
           {userData.savedRecipes?.map((recipe) => {
             return (
-              <Card key={recipe.foodId} style={{ width: "18rem" }}>
+              <Card key={recipe.id} style={{ width: "18rem" }}>
                 {recipe.image ? (
                   <Card.Img
                     src={recipe.image}
