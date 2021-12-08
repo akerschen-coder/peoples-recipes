@@ -50,6 +50,7 @@ userSchema.methods.isCorrectPassword = async function (password) {
 
 // make function here for saved recipes when we get there :)
 
+
 const User = model('User', userSchema);
 
 module.exports = User;

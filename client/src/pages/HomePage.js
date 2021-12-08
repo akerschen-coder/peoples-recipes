@@ -68,28 +68,37 @@ export default function Intro() {
         const recipeToSave = searchedRecipes.find(
             (recipe) => recipe.foodId === foodId
         );
+    
         console.log(recipeToSave);
         // get token
+        
         const token = Auth.loggedIn() ? Auth.getToken() : null;
+        console.log(token);
         if (!token) {
             return false;
         }
+    
         // got to here, won't go inside try
+        
         try {
             const { data } = await saveRecipe({
-                variables: { recipeData: { ...recipeToSave } },
+                variables: { recipeData: {...recipeToSave}  },
             });
+
             console.log(data);
+
             if (!data) {
                 throw new Error(error);
             }
-            // if recipe successfully saves to user's account, save book id to state
+
             setSavedRecipeIds([...savedRecipeIds, recipeToSave.foodId]);
-            console.log(savedRecipeIds)
+
+            console.log(savedRecipeIds);
+
         } catch (error) {
             console.error(error);
         }
-//es
+
     };
     return (
         <>
