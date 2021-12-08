@@ -9,15 +9,9 @@ const typeDefs = gql`
   }
 
   type Recipe {
-<<<<<<< HEAD
-    foodId: String!
-    label: String!
-    link: String!
-=======
     foodId: ID
     label: String
     link: String
->>>>>>> 8b09fcb625157ec61d9878bcc70d67d26b17c63e
     image: String
   }
 
