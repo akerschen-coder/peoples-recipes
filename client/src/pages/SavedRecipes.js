@@ -21,6 +21,8 @@ const SavedRecipe = () => {
 
   const userData = data?.me || {};
 
+  console.log(userData);
+
   const handleDeleteRecipe = async (foodId) => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
@@ -30,7 +32,7 @@ const SavedRecipe = () => {
 
     try {
       const { data } = await removeRecipe({
-        variables: { foodId },
+        variables: { foodId: foodId },
       });
 
       removeRecipeId(foodId);

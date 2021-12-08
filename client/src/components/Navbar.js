@@ -23,13 +23,13 @@ const AppNavbar = () => {
               {/* if user is logged in show saved books and logout */}
               {Auth.loggedIn() ? (
                 <>
-                  <Nav.Link className="text-light" as={Link} to='/saved'>
+                  <Nav.Link  as={Link} to='/saved' className="text-light">
                     Saved Recipes
                   </Nav.Link>
-                  <Nav.Link className="text-light" onClick={Auth.logout}>Logout</Nav.Link>
+                  <Nav.Link  onClick={Auth.logout} className="text-light">Logout</Nav.Link>
                 </>
               ) : (
-                <Nav.Link className="text-light" onClick={() => setShowModal(true)}>Login/Sign Up</Nav.Link>
+                <Nav.Link  onClick={() => setShowModal(true)} className="text-light">Login/Sign Up</Nav.Link>
               )}
             </Nav>
           </Navbar.Collapse>
