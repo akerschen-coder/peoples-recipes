@@ -74,17 +74,17 @@ export default function Intro() {
         
         const token = Auth.loggedIn() ? Auth.getToken() : null;
         console.log(token);
+
         if (!token) {
             return false;
         }
-    
-        // got to here, won't go inside try
         
         try {
             const { data } = await saveRecipe({
                 variables: { recipeData: {...recipeToSave}  },
             });
 
+            console.log(recipeToSave);
             console.log(data);
 
             if (!data) {
@@ -93,7 +93,6 @@ export default function Intro() {
 
             setSavedRecipeIds([...savedRecipeIds, recipeToSave.foodId]);
 
-            console.log(savedRecipeIds);
 
         } catch (error) {
             console.error(error);

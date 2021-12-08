@@ -43,11 +43,11 @@ const resolvers = {
         }, 
         // add recipe
         // yes
-        saveRecipe: async (parent, { recipeData }, context) => {
+        saveRecipe: async (parent,  {recipeData} , context) => {
             if(context.user) {
                 const updated = await User.findByIdAndUpdate(
                     { _id: context.user._id },
-                    {$push: { savedRecipes: { recipeData }} },
+                    {$push: { savedRecipes: recipeData  }},
                     { new: true },
                 );
                 
