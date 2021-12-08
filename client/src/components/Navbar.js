@@ -12,9 +12,9 @@ const AppNavbar = () => {
 
   return (
     <>
-      <Navbar bg='dark' variant='dark' expand='lg'>
+      <Navbar bg='info' variant='info' expand='lg'>
         <Container fluid>
-          <Navbar.Brand as={Link} to='/'>
+          <Navbar.Brand className="text-light" as={Link} to='/'>
             Grandma's Secrets
           </Navbar.Brand>
           <Navbar.Toggle aria-controls='navbar' />
@@ -23,13 +23,13 @@ const AppNavbar = () => {
               {/* if user is logged in show saved books and logout */}
               {Auth.loggedIn() ? (
                 <>
-                  <Nav.Link as={Link} to='/saved'>
+                  <Nav.Link  as={Link} to='/saved' className="text-light">
                     Saved Recipes
                   </Nav.Link>
-                  <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
+                  <Nav.Link  onClick={Auth.logout} className="text-light">Logout</Nav.Link>
                 </>
               ) : (
-                <Nav.Link onClick={() => setShowModal(true)}>Login/Sign Up</Nav.Link>
+                <Nav.Link  onClick={() => setShowModal(true)} className="text-light">Login/Sign Up</Nav.Link>
               )}
             </Nav>
           </Navbar.Collapse>
