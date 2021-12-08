@@ -3,7 +3,6 @@ const { Schema } = require('mongoose');
 const recipeSchema = new Schema({
     foodId: {
         type: String,
-        required: true,
     },
     label: {
         type: String,

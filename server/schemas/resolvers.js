@@ -47,15 +47,17 @@ const resolvers = {
             if(context.user) {
                 const updated = await User.findByIdAndUpdate(
                     { _id: context.user._id },
-                    {$addToSet: { savedRecipes: { recipeData }} },
+                    {$push: { savedRecipes: { recipeData }} },
                     { new: true },
                 );
+                
                 console.log(updated);
+
                 return updated;
             }
             console.log(recipeData);
             
-            throw new AuthenticationError('ungabunga')
+            throw new AuthenticationError('Gotta be logged in!')
         },
         // remove recipe
         removeRecipe:  async (parent, { foodId }, context) => {
