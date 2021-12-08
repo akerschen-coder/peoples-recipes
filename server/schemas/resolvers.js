@@ -11,6 +11,7 @@ const resolvers = {
                 
                 return userData;
             }
+            
             throw new AuthenticationError('Not logged in');
         }
     },
@@ -46,12 +47,16 @@ const resolvers = {
             if(context.user) {
                 const updated = await User.findByIdAndUpdate(
                     { _id: context.user._id },
-                    {$push: { savedRecipes: { recipeData }} },
+                    {$addToSet: { savedRecipes: { recipeData }} },
                     { new: true },
                 );
+                console.log(updated);
+                console.log({context});
                 return updated;
             }
-            throw new AuthenticationError('Gotta be logged in!')
+            console.log(recipeData);
+            
+            throw new AuthenticationError('ungabunga')
         },
         // remove recipe
         removeRecipe:  async (parent, { foodId }, context) => {

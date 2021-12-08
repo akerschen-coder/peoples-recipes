@@ -32,7 +32,7 @@ const SavedRecipe = () => {
     }
 
     try {
-      const {data} = await removeRecipe({
+      const { data } = await removeRecipe({
         variables: { foodId: foodId },
       });
 
@@ -45,7 +45,7 @@ const SavedRecipe = () => {
   if (loading) {
     return <h2>LOADING...</h2>;
   }
-//yes
+  //yes
 
   return (
     <>
@@ -57,9 +57,8 @@ const SavedRecipe = () => {
       <Container>
         <h2>
           {userData.savedRecipes?.length
-            ? `Viewing ${userData.savedRecipes.length} saved ${
-                userData.savedRecipes.length === 1 ? "recipe" : "recipes"
-              }:`
+            ? `Viewing ${userData.savedRecipes.length} saved ${userData.savedRecipes.length === 1 ? "recipe" : "recipes"
+            }:`
             : "You have no saved recipes!"}
         </h2>
         <CardColumns>
@@ -74,15 +73,13 @@ const SavedRecipe = () => {
                   />
                 ) : null}
                 <Card.Body>
-                  <Card.Title>{recipe.label}</Card.Title>
-                  <Card.Text>
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
-                  </Card.Text>
+                  <Card.Title style={{ textAlign: "center" }}>{recipe.label}</Card.Title>
+                  <Button href={recipe.link} target="_blank" className="btn-block btn-info">
+                    Go to this recipe?
+                  </Button>
                   <Button
                     variant="primary"
-                    onClick={() => handleDeleteRecipe(recipe.foodId)}
-                  >
+                    onClick={() => handleDeleteRecipe(recipe.foodId)}>
                     {" "}
                     Delete this recipe
                   </Button>
