@@ -21,11 +21,11 @@ const SavedRecipe = () => {
 
   const userData = data?.me || {};
 
-  console.log(userData);
+
 
   const handleDeleteRecipe = async (foodId) => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
-
+    console.log(foodId);
     if (!token) {
       return false;
     }
@@ -56,9 +56,8 @@ const SavedRecipe = () => {
       <Container>
         <h2>
           {userData.savedRecipes?.length
-            ? `Viewing ${userData.savedRecipes.length} saved ${
-                userData.savedRecipes.length === 1 ? "recipe" : "recipes"
-              }:`
+            ? `Viewing ${userData.savedRecipes.length} saved ${userData.savedRecipes.length === 1 ? "recipe" : "recipes"
+            }:`
             : "You have no saved recipes!"}
         </h2>
         <CardColumns>
