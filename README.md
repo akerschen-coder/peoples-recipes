@@ -4,7 +4,7 @@
 [Link to working site]()
 
 ## Description 
-We made an improved recipe searching app where users can save recipes to their profile.
+We made an improved recipe searching app where users can save recipes to their profile. Along with look up different recipes bsed on users input. 
 
 ## User Story: 
 ```md
