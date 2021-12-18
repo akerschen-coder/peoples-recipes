@@ -1,20 +1,24 @@
-# Grandma's Secrets 
+# Grandma's Secrets
 
-## Live Links 
+## Live Links
+
 [Link to working site]()
 
-## Description 
-We made an improved recipe searching app where users can save recipes to their profile. Along with look up different recipes bsed on users input. 
+## Description
 
-## User Story: 
+We made an improved recipe searching app where users can save recipes to their profile. Along with look up different recipes based on users input.
+
+## User Story:
+
 ```md
-A user can sign up 
+A user can sign up
 login and save recipes
-Able to look up recipes based on users input 
+Able to look up recipes based on users input
 Responsive and reacts to users information
-``` 
+```
 
-## Technologies Used 
+## Technologies Used
+
  <div style='margin: 1em 0;'>
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML" width="4%" />
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" width="4%" />
